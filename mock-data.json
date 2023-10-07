@@ -1,0 +1,22 @@
+[
+{
+    "id": 1,
+    "name": "Suzuki Mega Sprinter Van",
+    "imageURI": "https://billeder.bilbasen.dk/bilinfo/836b2148-d150-444a-91ef-4c797438048f.jpeg?class=S1600X1600"
+},
+{
+    "id": 2,
+    "name": "Mercedes Sprinter 2L",
+    "imageURI": "https://billeder.bilbasen.dk/bilinfo/971d0ca4-8268-44b3-a577-7273926b25b3.jpeg?class=S1600X1600"
+},
+{
+    "id": 3,
+    "name": "Peugeot 508",
+    "imageURI": "https://billeder.bilbasen.dk/bilinfo/83aff593-1095-4aec-b3e9-7d9c6945ff69.jpeg?class=S1600X1600"
+},
+{
+    "id": 4,
+    "name": "Suzuki",
+    "imageURI": "https://billeder.bilbasen.dk/bilinfo/d08dbf47-46b9-4996-b44c-ec80479a3a13.jpeg?class=S1600X1600"
+}
+]
