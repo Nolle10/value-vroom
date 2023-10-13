@@ -13,13 +13,10 @@ const Tabs = () => {
         <Tab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
+                headerShown: false,
                 tabBarStyle: { 
                     position: 'absolute',
-                    bottom: 25,
-                    left: 20,
-                    right: 20,
                     elevation: 0,
-                    borderRadius: 15,
                     height: 90,
                     ...styles.shadow
                 },
@@ -90,16 +87,6 @@ const Tabs = () => {
 }
 
 const styles = StyleSheet.create({
-    shadow: {
-        shadowColor: '#7F5DF0',
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.5,
-        elevation: 5
-    },
     focusColor: {
         color: '#E32F45',
     },

@@ -8,8 +8,7 @@ const HomeScreen = ({navigation}) => {
       <SafeAreaView style={styles.container}>
         <Text>Recommended</Text>
         <ScrollView 
-          style={styles.scrollView}
-          horizontal>
+          style={styles.scrollView}>
 
           {data.map((data, idx) => (
             <CarCard ID={data.id}
