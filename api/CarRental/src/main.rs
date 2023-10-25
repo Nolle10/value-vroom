@@ -5,10 +5,16 @@ use actix_web::{get,App ,Responder, HttpServer, web, HttpResponse, post, delete 
 use serde_json::{Value, from_str};
 
 
-#[post("/cars/create")]
-async fn hello(req_body: String) -> impl Responder {
-
+async fn init_pool() ->  sqlx::Pool<sqlx::Postgres>{
+    
     let pool = PgPoolOptions::new().max_connections(5).connect("postgres://gnftqdni:b4zdkYCs8tO9-ZJcMzzYQtJ4q14vIMD2@surus.db.elephantsql.com/gnftqdni").await.unwrap();
+    pool
+}
+
+
+#[post("/cars/create")]
+async fn create_car(pool: web::Data<sqlx::Pool<sqlx::Postgres>>, req_body: String) -> impl Responder {
+
     let value:Value = from_str(&req_body).unwrap();
     let model: String = value["model"].as_str().unwrap().to_owned();
     let year: i64 = value["year"].as_i64().unwrap().to_owned();
@@ -18,33 +24,31 @@ async fn hello(req_body: String) -> impl Responder {
     let description: String = value["description"].as_str().unwrap().to_owned();
     let result = sqlx::query(" Insert into cars(model,year,seats,pricePerDay,ratings,description) values ($1,$2,$3,$4,$5,$6)")
         .bind(&model).bind(&year).bind(&seats).bind(&pricePerDay).bind(&rating).bind(&description)
-        .execute(&pool)
+        .execute(&**pool)
         .await;
     HttpResponse::Ok().body("CREATED I THINK")
 
 }
 
 #[delete("/cars/delete")]
-async fn echo(req_body: String) -> impl Responder {
+async fn echo(pool: web::Data<sqlx::Pool<sqlx::Postgres>>, req_body: String) -> impl Responder {
 
-    let pool = PgPoolOptions::new().max_connections(5).connect("postgres://gnftqdni:b4zdkYCs8tO9-ZJcMzzYQtJ4q14vIMD2@surus.db.elephantsql.com/gnftqdni").await.unwrap();
     println!("{}",req_body);
     let val:Value = from_str(&req_body).unwrap();
     let search:i64=  val["carId"].as_i64().unwrap();
     let row = sqlx::query("delete from cars where carId = $1;")
         .bind(&search)
-        .execute(&pool)
+        .execute(&**pool)
         .await.unwrap();
     HttpResponse::Ok().body(req_body)
     
 }
 
 #[get("/cars/list")]
-async fn list() -> impl Responder {
+async fn list(pool: web::Data<sqlx::Pool<sqlx::Postgres>> ) -> impl Responder {
 
-    let pool = PgPoolOptions::new().max_connections(5).connect("postgres://gnftqdni:b4zdkYCs8tO9-ZJcMzzYQtJ4q14vIMD2@surus.db.elephantsql.com/gnftqdni").await.unwrap();
     let result = sqlx::query("select * from cars")
-        .fetch_all(&pool)
+        .fetch_all(&**pool)
         .await;
 let mut text_result = String::new();
 
@@ -66,30 +70,29 @@ HttpResponse::Ok().body(text_result)
 
 
 #[post("/users/create")]
-async fn create_user(req_body: String) -> impl Responder {
+async fn create_user(pool: web::Data<sqlx::Pool<sqlx::Postgres>> ,req_body: String) -> impl Responder {
 
-    let pool = PgPoolOptions::new().max_connections(5).connect("postgres://gnftqdni:b4zdkYCs8tO9-ZJcMzzYQtJ4q14vIMD2@surus.db.elephantsql.com/gnftqdni").await.unwrap();
     let value:Value = from_str(&req_body).unwrap();
     let fname: String = value["fname"].as_str().unwrap().to_owned();
     let lname: String = value["lname"].as_str().unwrap().to_owned();
     let email: String = value["email"].as_str().unwrap().to_owned();
     let password: String = value["password"].as_str().unwrap().to_owned(); // i know this is plain
-                                                                           // text but do i care is
+                                                                           // text 
+                                                                           // , but do i care is
                                                                            // a better question
     let result = sqlx::query(" Insert into users(fname,lname,email,password) values ($1,$2,$3,$4)")
         .bind(&fname).bind(&lname).bind(&email).bind(&password)
-        .execute(&pool)
+        .execute(&**pool)
         .await;
     HttpResponse::Ok().body("CREATED I THINK")
 
 }
 
 #[get("/users/list")]
-async fn list_users() -> impl Responder {
+async fn list_users(pool: web::Data<sqlx::Pool<sqlx::Postgres>> ) -> impl Responder {
 
-    let pool = PgPoolOptions::new().max_connections(5).connect("postgres://gnftqdni:b4zdkYCs8tO9-ZJcMzzYQtJ4q14vIMD2@surus.db.elephantsql.com/gnftqdni").await.unwrap();
     let result = sqlx::query("select * from users")
-        .fetch_all(&pool)
+        .fetch_all(&**pool)
         .await;
 let mut text_result = String::new();
 
@@ -111,20 +114,18 @@ HttpResponse::Ok().body(text_result)
 
 
 #[delete("/users/delete")]
-async fn delete_users(req_body: String) -> impl Responder {
+async fn delete_users(pool: web::Data<sqlx::Pool<sqlx::Postgres>>, req_body: String) -> impl Responder {
 
-    let pool = PgPoolOptions::new().max_connections(5).connect("postgres://gnftqdni:b4zdkYCs8tO9-ZJcMzzYQtJ4q14vIMD2@surus.db.elephantsql.com/gnftqdni").await.unwrap();
     println!("{}",req_body);
     let val:Value = from_str(&req_body).unwrap();
     let search:i64=  val["userId"].as_i64().unwrap();
     let row = sqlx::query("delete from users where userId = $1;")
         .bind(&search)
-        .execute(&pool)
+        .execute(&**pool)
         .await.unwrap();
     HttpResponse::Ok().body(req_body)
     
 }
-
 
 async fn manual_hello() -> impl Responder {
     HttpResponse::Ok().body("Hey there!")
@@ -132,10 +133,13 @@ async fn manual_hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()>{
+let pool = init_pool().await;
+let pool = web::Data::new(pool);
 
-    HttpServer::new(|| {
+     HttpServer::new(move || {
         App::new()
-            .service(hello)
+            .app_data(pool.clone())
+            .service(create_car)
             .service(echo)
             .service(list)
             .service(create_user)
