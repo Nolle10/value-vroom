@@ -2,6 +2,7 @@ import React from "react";
 import { View, SafeAreaView, Text, ActivityIndicator } from "react-native";
 import { CarList } from "../components/CarList";
 import { SearchHeader } from "../components/SearchHeader";
+import { BookingCalender } from "../components/checkout/BookingCalender";
 
 export function HomeScreen() {
     return (
