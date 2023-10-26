@@ -19,7 +19,7 @@ export function RootStackNavigator() {
             <RootStack.Screen name="Car Details" component={CarDetailsScreen} />
             <RootStack.Screen name="Filter" component={FilterScreen} />
             <RootStack.Screen name="Edit Profile" component={EditProfileScreen} />
-            <RootStack.Screen name="Order Booking" component={OrderBookingScreen} />
+            <RootStack.Screen name="Order Booking" component={OrderBookingScreen} initialParams={{carId: 1}}/>
             <RootStack.Screen name="Manage Car Booking" component={ManageBookingScreen} />
             <RootStack.Screen name="Inspection" component={InspectionScreen} />
             <RootStack.Screen name="Complaint" component={ComplaintScreen} />
