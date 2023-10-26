@@ -88,8 +88,7 @@ export function SignUpScreen() {
 
             {/* Button to initiate the sign-up process */}
             <TouchableOpacity className="items-center py-2 bg-primary rounded-full" onPress={() => {
-                authenticationStore.signup(username, password)
-                 // Adjust the function to perform sign-up
+                authenticationStore.signup(email, full_name, username, password)
             }} >
                 <Text className="text-white font-bold text-base">Sign Up</Text>
             </TouchableOpacity>
