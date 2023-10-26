@@ -9,23 +9,24 @@ export function ComplaintScreen() {
     const [complaintText, setComplaintText] = useState("");
     const [messageSent, setMessageSent] = useState(false);
 
-
     const submitComplaint = () => {
         console.log("Topic:", complaintTopic);
         console.log("Complaint:", complaintText);
-        setMessageSent(true); 
+        setMessageSent(true);
+
+    
+        setComplaintTopic("");
+        setComplaintText("");
     };
 
     return (
         <ScrollView style={{ flex: 1 }}>
             <View style={{ padding: 20 }}>
-
                 {messageSent && (
-                <Text style={{ backgroundColor: "lightgreen", padding: 10, borderRadius: 5, fontSize: 16, color: "green", textAlign: 'center', marginVertical: 10 }}>
-                Message Sent
-                </Text>
+                    <Text style={{ backgroundColor: "lightgreen", padding: 10, borderRadius: 5, fontSize: 16, color: "green", textAlign: 'center', marginVertical: 10 }}>
+                        Message Sent
+                    </Text>
                 )}  
-
 
                 <Text style={{ fontSize: 16, marginVertical: 10 }}>Topic:</Text>
                 <TextInput
@@ -50,7 +51,6 @@ export function ComplaintScreen() {
                 >
                     <Text style={{ color: 'white', fontSize: 18 }}>Submit Complaint</Text>
                 </TouchableOpacity>
-
             </View>
         </ScrollView>
     );
