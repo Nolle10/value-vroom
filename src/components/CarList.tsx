@@ -82,13 +82,13 @@ export function CarList() {
                 </>
             )}
             {groupedBookings.has("Booked") && (
-                <>
+               <>
                     <Text className="py-2 text-2xl font-bold">Booked</Text>
                     {groupedBookings.get("Booked")?.map((booking) => (
                         <CarCard state={CarCardState.Booked} key={booking.car?.id} car={booking.car!} booking={booking}  />
                     ))}
                 </>
-            )}
+            )} 
             <Text className="py-2 text-2xl font-bold">Recommended</Text>
             {availableCars.data?.map((car) => (
                 <CarCard state={CarCardState.Available} key={car.id} car={car} />
