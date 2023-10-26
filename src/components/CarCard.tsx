@@ -68,7 +68,7 @@ function getActionButtons(state: CarCardState, carId: number) {
                     <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-4 py-2" onPress={() => navigation.navigate("Order Booking", { carId: carId })}>
                         <Text className="text-lg text-white">Book Now</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2" onPress={() => navigation.navigate("Car Details")}>
+                    <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2" onPress={() => navigation.navigate("Car Details", { carId: carId })}>
                         <Text className="text-lg text-primary">Details</Text>
                     </TouchableOpacity>
                 </>
