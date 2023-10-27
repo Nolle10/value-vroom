@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Button, Text } from "react-native";
+import { View, Button, Text,ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { CarCard, CarCardState } from "../../components/CarCard";
 import { useCurrentUserCurrentUserGet, useGetAllCars, useGetBookedCars, useGetBookingsBookingsGet } from "../../api/apiComponents";
-import { ScrollView } from "react-native-gesture-handler";
+
 export function BookingsScreen() {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     let {data:data_1, error:error_1, isLoading:isLoading_1} = useGetBookingsBookingsGet({});
@@ -59,7 +59,7 @@ export function BookingsScreen() {
                 }
                 return null; 
             })}
-            <Text className="text-lg text-black bg-primary rounded p-2 text-center">
+            <Text className="text-lg text-black bg-primary rounded p-2">
                 Old Bookings
             </Text>
             {filteredBookings?.map((booking,index) =>{
