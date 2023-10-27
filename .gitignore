@@ -18,3 +18,4 @@ web-build/
 
 # Generated files
 src/api
+yarn.lock

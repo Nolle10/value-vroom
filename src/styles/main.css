@@ -8,3 +8,13 @@ body {
     max-width: 15cm;
     background-color: gray;
 }
+
+div {
+    max-width: 15cm;
+}
+
+[aria-modal="true"] {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 15cm;
+}
