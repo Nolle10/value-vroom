@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, ScrollView, TouchableOpacity, Linking } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Logo } from "../../components/Logo";
 
 export function ContactUsScreen() {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -30,8 +31,12 @@ export function ContactUsScreen() {
                         Message Sent
                     </Text>
                 )}
-                <Text className="text-lg my-4">Phone:</Text>
-                <Text className="text-base my-1 py-2 bg-gray-200 text-gray-500 text-center rounded-md">Contact us at: {phoneNumber}</Text>
+
+                <Logo />
+                <Text className="text-lg my-4 mt-7 text-center">We here at ValueVorrom appreciate your inputs and are always interested and ready to respond to your questions or wishes.</Text>
+
+                <Text className="text-lg my-4 mt-16">Phone:</Text>
+                <Text className="text-base my-1 mb-20 py-2 bg-gray-200 text-gray-500 text-center rounded-md">Contact us at: {phoneNumber}</Text>
 
                 <Text className="text-lg my-4">Email:</Text>
                 <Text className="text-base my-1 py-2 bg-gray-200 text-gray-500 text-center rounded-md">contact@example.com</Text>
