@@ -52,7 +52,7 @@ function getActionButtons(state: CarCardState, carId: number) {
         case CarCardState.Booked:
             return (
                 <>
-                    <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-4 py-2">
+                    <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-4 py-2" onPress={()=> navigation.navigate("Manage Car Booking", {carId: carId})}>
                         <Text className="text-lg text-white">Activate</Text>
                     </TouchableOpacity>
                     <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2">
