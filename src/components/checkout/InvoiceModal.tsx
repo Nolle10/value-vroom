@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { baseUrl } from '../../api/apiUrl';
+import { queryClient } from '../../App';
 
 export function InvoiceModal(
     {
@@ -156,6 +157,7 @@ export function InvoiceModal(
                             onSuccess: () => {
                                 setModalVisible(false);
                                 navigation.navigate('OrderConfirmation');
+                                queryClient.invalidateQueries()
                             }
                         })}>
                             {payMutation.isLoading ? (
