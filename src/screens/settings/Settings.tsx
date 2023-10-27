@@ -69,7 +69,7 @@ export function SettingsScreen() {
                     </View>)
                 }
 
-                <TouchableOpacity className="items-center py-2 bg-white border-2 border-primary rounded-xl">
+                <TouchableOpacity className="items-center py-2 bg-white border-2 border-primary rounded-xl" onPress={() => navigation.navigate("Contact Us")}>
                     <Text className="text-primary font-bold text-base">Contact Us</Text>
                 </TouchableOpacity>
             </View>

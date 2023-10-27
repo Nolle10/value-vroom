@@ -12,6 +12,7 @@ import { OrderConfirmation } from '../screens/bookings/OrderConfirmation';
 import { LoginScreen } from '../screens/settings/Login';
 import { SignUpScreen } from '../screens/settings/SignUp';
 import { ReviewScreen } from '../screens/bookings/Review';
+import { ContactUsScreen } from '../screens/settings/ContactUs';
 
 const RootStack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export function RootStackNavigator() {
             <RootStack.Screen name="Login" component={LoginScreen} />
             <RootStack.Screen name="Sign Up" component={SignUpScreen} />
             <RootStack.Screen name="OrderConfirmation" component={OrderConfirmation} />
+            <RootStack.Screen name="Contact Us" component={ContactUsScreen} />
         </RootStack.Navigator>
     );
 }
