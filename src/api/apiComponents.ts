@@ -450,6 +450,114 @@ export const useCreateBookingBookingsPost = (
   })
 }
 
+export type CancelBookingBookingsBookingIdCancelPostPathParams = {
+  bookingId: number
+}
+
+export type CancelBookingBookingsBookingIdCancelPostError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type CancelBookingBookingsBookingIdCancelPostVariables = {
+  pathParams: CancelBookingBookingsBookingIdCancelPostPathParams
+} & ApiContext['fetcherOptions']
+
+/**
+ * Cancel a booking
+ */
+export const fetchCancelBookingBookingsBookingIdCancelPost = (
+  variables: CancelBookingBookingsBookingIdCancelPostVariables,
+  signal?: AbortSignal,
+) =>
+  apiFetch<
+    Schemas.Booking,
+    CancelBookingBookingsBookingIdCancelPostError,
+    undefined,
+    {},
+    {},
+    CancelBookingBookingsBookingIdCancelPostPathParams
+  >({ url: '/bookings/{bookingId}/cancel', method: 'post', ...variables, signal })
+
+/**
+ * Cancel a booking
+ */
+export const useCancelBookingBookingsBookingIdCancelPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Booking,
+      CancelBookingBookingsBookingIdCancelPostError,
+      CancelBookingBookingsBookingIdCancelPostVariables
+    >,
+    'mutationFn'
+  >,
+) => {
+  const { fetcherOptions } = useApiContext()
+  return reactQuery.useMutation<
+    Schemas.Booking,
+    CancelBookingBookingsBookingIdCancelPostError,
+    CancelBookingBookingsBookingIdCancelPostVariables
+  >({
+    mutationFn: (variables: CancelBookingBookingsBookingIdCancelPostVariables) =>
+      fetchCancelBookingBookingsBookingIdCancelPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  })
+}
+
+export type ActivateBookingBookingsBookingIdActivatePostPathParams = {
+  bookingId: number
+}
+
+export type ActivateBookingBookingsBookingIdActivatePostError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type ActivateBookingBookingsBookingIdActivatePostVariables = {
+  pathParams: ActivateBookingBookingsBookingIdActivatePostPathParams
+} & ApiContext['fetcherOptions']
+
+/**
+ * Activate a booking
+ */
+export const fetchActivateBookingBookingsBookingIdActivatePost = (
+  variables: ActivateBookingBookingsBookingIdActivatePostVariables,
+  signal?: AbortSignal,
+) =>
+  apiFetch<
+    Schemas.Booking,
+    ActivateBookingBookingsBookingIdActivatePostError,
+    undefined,
+    {},
+    {},
+    ActivateBookingBookingsBookingIdActivatePostPathParams
+  >({ url: '/bookings/{bookingId}/activate', method: 'post', ...variables, signal })
+
+/**
+ * Activate a booking
+ */
+export const useActivateBookingBookingsBookingIdActivatePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Booking,
+      ActivateBookingBookingsBookingIdActivatePostError,
+      ActivateBookingBookingsBookingIdActivatePostVariables
+    >,
+    'mutationFn'
+  >,
+) => {
+  const { fetcherOptions } = useApiContext()
+  return reactQuery.useMutation<
+    Schemas.Booking,
+    ActivateBookingBookingsBookingIdActivatePostError,
+    ActivateBookingBookingsBookingIdActivatePostVariables
+  >({
+    mutationFn: (variables: ActivateBookingBookingsBookingIdActivatePostVariables) =>
+      fetchActivateBookingBookingsBookingIdActivatePost({ ...fetcherOptions, ...variables }),
+    ...options,
+  })
+}
+
 export type QueryOperation =
   | {
       path: '/current_user'
