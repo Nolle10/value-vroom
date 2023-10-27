@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button, Text,ScrollView } from "react-native";
+import { View, Button, Text, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { CarCard, CarCardState } from "../../components/CarCard";
@@ -15,7 +15,7 @@ export function BookingsScreen() {
        if (isLoading){
        return(
              <Button
-                title="Yo you gotta be logged in to make this stuff work" onPress={() => navigation.navigate("Login")}
+                title="Please log into your account" onPress={() => navigation.navigate("Login")}
             />
        );
        }
@@ -28,8 +28,7 @@ export function BookingsScreen() {
        }
     return (
        <ScrollView style={{ flex: 1 }}>
-            <Text className="text-lg text-black  bg-primary rounded p-2 text-center"
->
+            <Text className="text-lg text-black  bg-primary rounded p-2 text-center">
                 Currently Booked
             </Text>
             {filteredBookings?.map((booking,index) =>{
@@ -45,8 +44,7 @@ export function BookingsScreen() {
             })}
 
             
-            <Text className="text-lg text-black bg-primary rounded p-2 text-center"
->
+            <Text className="text-lg text-black bg-primary rounded p-2 text-center">
                 Future Bookings
             </Text>
             
@@ -59,7 +57,7 @@ export function BookingsScreen() {
                 }
                 return null; 
             })}
-            <Text className="text-lg text-black bg-primary rounded p-2">
+            <Text className="text-lg text-black bg-primary rounded p-2 text-center">
                 Old Bookings
             </Text>
             {filteredBookings?.map((booking,index) =>{

@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { View, Button, Text ,TouchableOpacity,TextInput, Alert} from "react-native";
+import { View, Button, Text , TouchableOpacity, TextInput, Alert} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Svg, { Polygon } from 'react-native-svg';
 
 export function ReviewScreen() {
-    const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
-console.log("Review loaded")
 
     interface IconProps {
   size?: number;
@@ -15,11 +12,12 @@ console.log("Review loaded")
   id?:number;
   
 }
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [starColors, setStarColors] = useState(Array(5).fill("#f00000"));
   const [recommend, setRecommend] = useState(false);
   const [notRecommend, setNotRecommend] = useState(false);
   const [reviewText, setReviewText] = useState('');
-const FullStar = ({ size = 24, color = "#000000", id = 0 }: IconProps) => {  // This have been taking from https://dev.to/mdmostafizurrahaman/how-to-make-a-rating-component-with-react-typescript-396p
+const FullStar = ({ size = 24, color = "#000000", id = 0 }: IconProps) => { 
   return (
     <TouchableOpacity onPress={() => handleStarPress(id)}>
     <View>

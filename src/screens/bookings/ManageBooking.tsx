@@ -15,7 +15,6 @@ export function ManageBookingScreen({
     let {data:bookedCarsData, error:bookedCarError, isLoading:bookedCarIsLoading} = useGetBookedCars({});
     let {data:currentUserData, error:userError, isLoading:isLoading_user} = useCurrentUserCurrentUserGet({});
     const filterData = bookedCarsData?.filter(car => car.id === route.params?.carId)|| []
-    console.log(filterData)
     let {data: bookingsData, error: bookingsError, isLoading: bookingIsLoading} = useGetCarBookings({pathParams: {
     carId: route.params?.carId}});
     const filteredBookings = bookingsData?.filter(booking => booking.username ===currentUserData?.username)
