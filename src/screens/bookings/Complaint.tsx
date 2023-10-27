@@ -10,8 +10,6 @@ export function ComplaintScreen() {
     const [messageSent, setMessageSent] = useState(false);
 
     const submitComplaint = () => {
-        console.log("Topic:", complaintTopic);
-        console.log("Complaint:", complaintText);
         setMessageSent(true);
 
     
@@ -20,37 +18,40 @@ export function ComplaintScreen() {
     };
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <View style={{ padding: 20 }}>
+        <ScrollView className="flex-1">
+            <View className="p-5">
                 {messageSent && (
-                    <Text style={{ backgroundColor: "lightgreen", padding: 10, borderRadius: 5, fontSize: 16, color: "green", textAlign: 'center', marginVertical: 10 }}>
+                    <Text className="bg-lime-300 p-10 rounded-md text-base text-green-500 text-center my-10">
                         Message Sent
                     </Text>
                 )}  
 
-                <Text style={{ fontSize: 16, marginVertical: 10 }}>Topic:</Text>
+                <Text className="dark:text-white text-base my-10">Topic:</Text>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 8 }}
+                    className="h-20 border-gray-400 border rounded-md p-8 dark:text-white"
                     placeholder="Enter complaint topic"
                     value={complaintTopic}
                     onChangeText={(text) => setComplaintTopic(text)}
                 />
 
-                <Text style={{ fontSize: 16, marginVertical: 10 }}>Complaint Details:</Text>
+                <Text className="text-base my-10 dark:text-white">Complaint Details:</Text>
                 <TextInput
-                    style={{ height: 150, borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 8 }}
+                    className="h-150 border-gray-400 border rounded-md p-8 dark:text-white"
                     placeholder="Describe your complaint"
                     multiline
                     value={complaintText}
                     onChangeText={(text) => setComplaintText(text)}
                 />
 
+            <View className="pt-10">
                 <TouchableOpacity
-                    style={{ backgroundColor: "#FFB703", padding: 10, borderRadius: 5, alignItems: 'center', marginVertical: 25 }}
-                    onPress={submitComplaint}
-                >
-                    <Text style={{ color: 'white', fontSize: 18 }}>Submit Complaint</Text>
+                    className="bg-[#FFB703] p-10 rounded-md items-center my-25"
+                    onPress={submitComplaint}>
+
+                    <Text className="text-white text-base">Submit Complaint</Text>
                 </TouchableOpacity>
+            </View>
+               
             </View>
         </ScrollView>
     );
