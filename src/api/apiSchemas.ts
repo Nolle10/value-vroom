@@ -71,6 +71,7 @@ export type Car = {
   country: string
   city: string
   price: number
+  rating: number
   Booking?: Booking[] | null
 }
 
