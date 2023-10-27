@@ -88,11 +88,16 @@ const handleSubmit = () => {
         <Text style={{ color: 'white', marginVertical: 10 }}>Would you recommend this service to a friend?</Text>
         
         <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity onPress={() => setRecommend(true)}>
+            <TouchableOpacity onPress={() => {
+              setRecommend(true)
+              setNotRecommend(false)
+            }
+            }>
                 <Text style={{ color: recommend ? 'green' : 'white' }}>Yes</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity onPress={() => setNotRecommend(true)}>
+            <TouchableOpacity onPress={() => {setNotRecommend(true)
+            setRecommend(false)}}>
                 <Text style={{ color: notRecommend ? 'red' : 'white', marginLeft: 20 }}>No</Text>
             </TouchableOpacity>
         </View>
