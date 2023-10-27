@@ -147,18 +147,18 @@ export const useGetUsers = <TData = GetUsersResponse>(
   })
 }
 
-export type GetCarsCarsGetError = Fetcher.ErrorWrapper<undefined>
+export type GetAllCarsError = Fetcher.ErrorWrapper<undefined>
 
-export type GetCarsCarsGetResponse = Schemas.Car[]
+export type GetAllCarsResponse = Schemas.Car[]
 
-export type GetCarsCarsGetVariables = ApiContext['fetcherOptions']
+export type GetAllCarsVariables = ApiContext['fetcherOptions']
 
 /**
  * Get all cars
  */
-export const fetchGetCarsCarsGet = (variables: GetCarsCarsGetVariables, signal?: AbortSignal) =>
-  apiFetch<GetCarsCarsGetResponse, GetCarsCarsGetError, undefined, {}, {}, {}>({
-    url: '/cars',
+export const fetchGetAllCars = (variables: GetAllCarsVariables, signal?: AbortSignal) =>
+  apiFetch<GetAllCarsResponse, GetAllCarsError, undefined, {}, {}, {}>({
+    url: '/cars/all',
     method: 'get',
     ...variables,
     signal,
@@ -167,17 +167,134 @@ export const fetchGetCarsCarsGet = (variables: GetCarsCarsGetVariables, signal?:
 /**
  * Get all cars
  */
-export const useGetCarsCarsGet = <TData = GetCarsCarsGetResponse>(
-  variables: GetCarsCarsGetVariables,
+export const useGetAllCars = <TData = GetAllCarsResponse>(
+  variables: GetAllCarsVariables,
   options?: Omit<
-    reactQuery.UseQueryOptions<GetCarsCarsGetResponse, GetCarsCarsGetError, TData>,
+    reactQuery.UseQueryOptions<GetAllCarsResponse, GetAllCarsError, TData>,
     'queryKey' | 'queryFn' | 'initialData'
   >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } = useApiContext(options)
-  return reactQuery.useQuery<GetCarsCarsGetResponse, GetCarsCarsGetError, TData>({
-    queryKey: queryKeyFn({ path: '/cars', operationId: 'getCarsCarsGet', variables }),
-    queryFn: ({ signal }) => fetchGetCarsCarsGet({ ...fetcherOptions, ...variables }, signal),
+  return reactQuery.useQuery<GetAllCarsResponse, GetAllCarsError, TData>({
+    queryKey: queryKeyFn({ path: '/cars/all', operationId: 'getAllCars', variables }),
+    queryFn: ({ signal }) => fetchGetAllCars({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  })
+}
+
+export type GetBookedCarsError = Fetcher.ErrorWrapper<undefined>
+
+export type GetBookedCarsResponse = Schemas.Car[]
+
+export type GetBookedCarsVariables = ApiContext['fetcherOptions']
+
+/**
+ * Get all booked cars
+ */
+export const fetchGetBookedCars = (variables: GetBookedCarsVariables, signal?: AbortSignal) =>
+  apiFetch<GetBookedCarsResponse, GetBookedCarsError, undefined, {}, {}, {}>({
+    url: '/cars/booked',
+    method: 'get',
+    ...variables,
+    signal,
+  })
+
+/**
+ * Get all booked cars
+ */
+export const useGetBookedCars = <TData = GetBookedCarsResponse>(
+  variables: GetBookedCarsVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetBookedCarsResponse, GetBookedCarsError, TData>,
+    'queryKey' | 'queryFn' | 'initialData'
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } = useApiContext(options)
+  return reactQuery.useQuery<GetBookedCarsResponse, GetBookedCarsError, TData>({
+    queryKey: queryKeyFn({ path: '/cars/booked', operationId: 'getBookedCars', variables }),
+    queryFn: ({ signal }) => fetchGetBookedCars({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  })
+}
+
+export type GetAvailableCarsError = Fetcher.ErrorWrapper<undefined>
+
+export type GetAvailableCarsResponse = Schemas.Car[]
+
+export type GetAvailableCarsVariables = ApiContext['fetcherOptions']
+
+/**
+ * Get all available cars
+ */
+export const fetchGetAvailableCars = (variables: GetAvailableCarsVariables, signal?: AbortSignal) =>
+  apiFetch<GetAvailableCarsResponse, GetAvailableCarsError, undefined, {}, {}, {}>({
+    url: '/cars/available',
+    method: 'get',
+    ...variables,
+    signal,
+  })
+
+/**
+ * Get all available cars
+ */
+export const useGetAvailableCars = <TData = GetAvailableCarsResponse>(
+  variables: GetAvailableCarsVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetAvailableCarsResponse, GetAvailableCarsError, TData>,
+    'queryKey' | 'queryFn' | 'initialData'
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } = useApiContext(options)
+  return reactQuery.useQuery<GetAvailableCarsResponse, GetAvailableCarsError, TData>({
+    queryKey: queryKeyFn({ path: '/cars/available', operationId: 'getAvailableCars', variables }),
+    queryFn: ({ signal }) => fetchGetAvailableCars({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  })
+}
+
+export type GetCarBookingsPathParams = {
+  carId: number
+}
+
+export type GetCarBookingsError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type GetCarBookingsResponse = Schemas.Booking[]
+
+export type GetCarBookingsVariables = {
+  pathParams: GetCarBookingsPathParams
+} & ApiContext['fetcherOptions']
+
+/**
+ * Get all bookings for a specific car
+ */
+export const fetchGetCarBookings = (variables: GetCarBookingsVariables, signal?: AbortSignal) =>
+  apiFetch<GetCarBookingsResponse, GetCarBookingsError, undefined, {}, {}, GetCarBookingsPathParams>({
+    url: '/cars/{carId}/bookings',
+    method: 'get',
+    ...variables,
+    signal,
+  })
+
+/**
+ * Get all bookings for a specific car
+ */
+export const useGetCarBookings = <TData = GetCarBookingsResponse>(
+  variables: GetCarBookingsVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetCarBookingsResponse, GetCarBookingsError, TData>,
+    'queryKey' | 'queryFn' | 'initialData'
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } = useApiContext(options)
+  return reactQuery.useQuery<GetCarBookingsResponse, GetCarBookingsError, TData>({
+    queryKey: queryKeyFn({ path: '/cars/{car_id}/bookings', operationId: 'getCarBookings', variables }),
+    queryFn: ({ signal }) => fetchGetCarBookings({ ...fetcherOptions, ...variables }, signal),
     ...options,
     ...queryOptions,
   })
@@ -262,6 +379,185 @@ export const useGetImageImagesImageNameGet = <TData = undefined>(
   })
 }
 
+export type GetBookingsBookingsGetError = Fetcher.ErrorWrapper<undefined>
+
+export type GetBookingsBookingsGetResponse = Schemas.Booking[]
+
+export type GetBookingsBookingsGetVariables = ApiContext['fetcherOptions']
+
+/**
+ * Get all bookings
+ */
+export const fetchGetBookingsBookingsGet = (variables: GetBookingsBookingsGetVariables, signal?: AbortSignal) =>
+  apiFetch<GetBookingsBookingsGetResponse, GetBookingsBookingsGetError, undefined, {}, {}, {}>({
+    url: '/bookings',
+    method: 'get',
+    ...variables,
+    signal,
+  })
+
+/**
+ * Get all bookings
+ */
+export const useGetBookingsBookingsGet = <TData = GetBookingsBookingsGetResponse>(
+  variables: GetBookingsBookingsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetBookingsBookingsGetResponse, GetBookingsBookingsGetError, TData>,
+    'queryKey' | 'queryFn' | 'initialData'
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } = useApiContext(options)
+  return reactQuery.useQuery<GetBookingsBookingsGetResponse, GetBookingsBookingsGetError, TData>({
+    queryKey: queryKeyFn({ path: '/bookings', operationId: 'getBookingsBookingsGet', variables }),
+    queryFn: ({ signal }) => fetchGetBookingsBookingsGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  })
+}
+
+export type CreateBookingBookingsPostError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type CreateBookingBookingsPostVariables = ApiContext['fetcherOptions']
+
+/**
+ * Create a booking
+ */
+export const fetchCreateBookingBookingsPost = (variables: CreateBookingBookingsPostVariables, signal?: AbortSignal) =>
+  apiFetch<Schemas.Booking, CreateBookingBookingsPostError, undefined, {}, {}, {}>({
+    url: '/bookings',
+    method: 'post',
+    ...variables,
+    signal,
+  })
+
+/**
+ * Create a booking
+ */
+export const useCreateBookingBookingsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<Schemas.Booking, CreateBookingBookingsPostError, CreateBookingBookingsPostVariables>,
+    'mutationFn'
+  >,
+) => {
+  const { fetcherOptions } = useApiContext()
+  return reactQuery.useMutation<Schemas.Booking, CreateBookingBookingsPostError, CreateBookingBookingsPostVariables>({
+    mutationFn: (variables: CreateBookingBookingsPostVariables) =>
+      fetchCreateBookingBookingsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  })
+}
+
+export type CancelBookingBookingsBookingIdCancelPostPathParams = {
+  bookingId: number
+}
+
+export type CancelBookingBookingsBookingIdCancelPostError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type CancelBookingBookingsBookingIdCancelPostVariables = {
+  pathParams: CancelBookingBookingsBookingIdCancelPostPathParams
+} & ApiContext['fetcherOptions']
+
+/**
+ * Cancel a booking
+ */
+export const fetchCancelBookingBookingsBookingIdCancelPost = (
+  variables: CancelBookingBookingsBookingIdCancelPostVariables,
+  signal?: AbortSignal,
+) =>
+  apiFetch<
+    Schemas.Booking,
+    CancelBookingBookingsBookingIdCancelPostError,
+    undefined,
+    {},
+    {},
+    CancelBookingBookingsBookingIdCancelPostPathParams
+  >({ url: '/bookings/{bookingId}/cancel', method: 'post', ...variables, signal })
+
+/**
+ * Cancel a booking
+ */
+export const useCancelBookingBookingsBookingIdCancelPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Booking,
+      CancelBookingBookingsBookingIdCancelPostError,
+      CancelBookingBookingsBookingIdCancelPostVariables
+    >,
+    'mutationFn'
+  >,
+) => {
+  const { fetcherOptions } = useApiContext()
+  return reactQuery.useMutation<
+    Schemas.Booking,
+    CancelBookingBookingsBookingIdCancelPostError,
+    CancelBookingBookingsBookingIdCancelPostVariables
+  >({
+    mutationFn: (variables: CancelBookingBookingsBookingIdCancelPostVariables) =>
+      fetchCancelBookingBookingsBookingIdCancelPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  })
+}
+
+export type ActivateBookingBookingsBookingIdActivatePostPathParams = {
+  bookingId: number
+}
+
+export type ActivateBookingBookingsBookingIdActivatePostError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type ActivateBookingBookingsBookingIdActivatePostVariables = {
+  pathParams: ActivateBookingBookingsBookingIdActivatePostPathParams
+} & ApiContext['fetcherOptions']
+
+/**
+ * Activate a booking
+ */
+export const fetchActivateBookingBookingsBookingIdActivatePost = (
+  variables: ActivateBookingBookingsBookingIdActivatePostVariables,
+  signal?: AbortSignal,
+) =>
+  apiFetch<
+    Schemas.Booking,
+    ActivateBookingBookingsBookingIdActivatePostError,
+    undefined,
+    {},
+    {},
+    ActivateBookingBookingsBookingIdActivatePostPathParams
+  >({ url: '/bookings/{bookingId}/activate', method: 'post', ...variables, signal })
+
+/**
+ * Activate a booking
+ */
+export const useActivateBookingBookingsBookingIdActivatePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Booking,
+      ActivateBookingBookingsBookingIdActivatePostError,
+      ActivateBookingBookingsBookingIdActivatePostVariables
+    >,
+    'mutationFn'
+  >,
+) => {
+  const { fetcherOptions } = useApiContext()
+  return reactQuery.useMutation<
+    Schemas.Booking,
+    ActivateBookingBookingsBookingIdActivatePostError,
+    ActivateBookingBookingsBookingIdActivatePostVariables
+  >({
+    mutationFn: (variables: ActivateBookingBookingsBookingIdActivatePostVariables) =>
+      fetchActivateBookingBookingsBookingIdActivatePost({ ...fetcherOptions, ...variables }),
+    ...options,
+  })
+}
+
 export type QueryOperation =
   | {
       path: '/current_user'
@@ -274,9 +570,24 @@ export type QueryOperation =
       variables: GetUsersVariables
     }
   | {
-      path: '/cars'
-      operationId: 'getCarsCarsGet'
-      variables: GetCarsCarsGetVariables
+      path: '/cars/all'
+      operationId: 'getAllCars'
+      variables: GetAllCarsVariables
+    }
+  | {
+      path: '/cars/booked'
+      operationId: 'getBookedCars'
+      variables: GetBookedCarsVariables
+    }
+  | {
+      path: '/cars/available'
+      operationId: 'getAvailableCars'
+      variables: GetAvailableCarsVariables
+    }
+  | {
+      path: '/cars/{car_id}/bookings'
+      operationId: 'getCarBookings'
+      variables: GetCarBookingsVariables
     }
   | {
       path: '/images'
@@ -287,4 +598,9 @@ export type QueryOperation =
       path: '/images/{image_name}'
       operationId: 'getImageImagesImageNameGet'
       variables: GetImageImagesImageNameGetVariables
+    }
+  | {
+      path: '/bookings'
+      operationId: 'getBookingsBookingsGet'
+      variables: GetBookingsBookingsGetVariables
     }

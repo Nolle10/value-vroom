@@ -3,6 +3,15 @@
  *
  * @version 0.1.0
  */
+export type BodyCreateBookingBookingsPost = {
+  /**
+   * @format date-time
+   */
+  end_date: string
+  car_id: number
+  start_date?: string | null
+}
+
 export type BodyLoginTokenPost = {
   grant_type?: string | null
   username: string
@@ -23,6 +32,35 @@ export type BodySignupSignupPost = {
 }
 
 /**
+ * Represents a Booking record
+ */
+export type Booking = {
+  id: number
+  /**
+   * @format date-time
+   */
+  start_date: string
+  /**
+   * @format date-time
+   */
+  end_date: string
+  car_id: number
+  car?: Car | null
+  user?: User | null
+  username: string
+  status_name: string
+  status?: BookingStatus | null
+}
+
+/**
+ * Represents a BookingStatus record
+ */
+export type BookingStatus = {
+  name: string
+  Booking?: Booking[] | null
+}
+
+/**
  * Represents a Car record
  */
 export type Car = {
@@ -33,6 +71,8 @@ export type Car = {
   country: string
   city: string
   price: number
+  rating: number
+  Booking?: Booking[] | null
 }
 
 /**
@@ -90,6 +130,7 @@ export type User = {
   email: string
   full_name: string
   hashed_password: string
+  Booking?: Booking[] | null
 }
 
 export type ValidationError = {
