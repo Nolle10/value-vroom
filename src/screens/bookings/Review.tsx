@@ -65,46 +65,52 @@ const handleSubmit = () => {
     );
 };
 
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'gray' }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Review Your Experience</Text>
-        <Text style={{ color: 'white', textAlign: 'center' }}>We'd love to hear about your experience renting a car from Value Vroom.</Text>
-        
-        <View style={{ flexDirection: 'row', marginVertical: 20 }}>
+      return (
+        <div className="flex-1 flex flex-col items-center justify-center bg-gray-600">
+          <h2 className="text-2xl font-bold text-white">Review Your Experience</h2>
+          <p className="text-white text-center">We'd love to hear about your experience renting a car from Value Vroom.</p>
+    
+          <div className="flex flex-row my-5">
             {stars}
-        </View>
-
-        <TextInput 
-            style={{ height: 100, width: '80%', borderColor: 'white', borderWidth: 1, backgroundColor: 'white', padding: 10 }}
-            multiline={true}
-            numberOfLines={4}
+          </div>
+    
+          <textarea 
+            className="h-24 w-4/5 border rounded bg-white p-3"
             placeholder="Leave your review here..."
-            onChangeText={text => setReviewText(text)}
+            onChange={(e) => setReviewText(e.target.value)}
             value={reviewText}
-        />
-
-        <Text style={{ color: 'white', marginVertical: 10 }}>Would you recommend this service to a friend?</Text>
-        
-        <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity onPress={() => {
-              setRecommend(true)
-              setNotRecommend(false)
-            }
-            }>
-                <Text style={{ color: recommend ? 'green' : 'white' }}>Yes</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity onPress={() => {setNotRecommend(true)
-            setRecommend(false)}}>
-                <Text style={{ color: notRecommend ? 'red' : 'white', marginLeft: 20 }}>No</Text>
-            </TouchableOpacity>
-        </View>
-
-        <Button
-            title="Submit Review"
-         
-            onPress={handleSubmit}
-        />
-    </View>
-);
-}
+          />
+    
+          <p className="text-white my-3">Would you recommend this service to a friend?</p>
+    
+          <div className="flex flex-row">
+            <button 
+              className={`text-lg rounded-lg p-3 m-2 ${recommend ? 'bg-green-500' : 'bg-white'}`}
+              onClick={() => {
+                setRecommend(true);
+                setNotRecommend(false);
+              }}
+            >
+              Yes
+            </button>
+    
+            <button 
+              className={`text-lg rounded-lg p-3 m-2 ${notRecommend ? 'bg-red-500' : 'bg-white'}`}
+              onClick={() => {
+                setNotRecommend(true);
+                setRecommend(false);
+              }}
+            >
+              No
+            </button>
+          </div>
+    
+          <button 
+            className="text-lg bg-orange-500 text-white rounded-lg p-3 m-2"
+            onClick={handleSubmit}
+          >
+            Submit Review
+          </button>
+        </div>
+      );
+    };
