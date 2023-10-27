@@ -19,25 +19,25 @@ export function InspectionScreen() {
     };
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <View style={{ padding: 20 }}>
+        <ScrollView className="flex-1">
+            <View className="p-4">
                 {messageSent && (
-                    <Text style={{ backgroundColor: "lightgreen", padding: 10, borderRadius: 5, fontSize: 16, color: "green", textAlign: 'center', marginVertical: 10 }}>
+                    <Text className=" bg-lime-200 p-2 text-lg text-green-600 py-2 text-center rounded-md items-center my-5">
                         Message Sent
                     </Text>
                 )}  
 
-                <Text style={{ fontSize: 16, marginVertical: 10 }}>Topic:</Text>
+                <Text lassName="text-base my-4">Topic:</Text>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 8 }}
+                    className="h-10 border border-gray-300 rounded-md px-4 m-3 mb-10"
                     placeholder="Enter topic"
                     value={inspectionTopic}
                     onChangeText={(text) => setInspectionTopic(text)}
                 />
 
-                <Text style={{ fontSize: 16, marginVertical: 10 }}>Inspection Details:</Text>
+                <Text lassName="text-base my-4">Inspection Details:</Text>
                 <TextInput
-                    style={{ height: 150, borderColor: 'gray', borderWidth: 1, borderRadius: 5, padding: 8 }}
+                    className="h-32 border border-gray-300 rounded-md px-4 m-3"
                     placeholder="Describe your inspection"
                     multiline
                     value={inspectionText}
@@ -45,24 +45,12 @@ export function InspectionScreen() {
                 />
 
                 <TouchableOpacity
-                    style={{ backgroundColor: "#FFB703", padding: 10, borderRadius: 5, alignItems: 'center', marginVertical: 25 }}
+                    className="bg-[#FFB703] py-2 rounded-md items-center my-5"
                     onPress={submitInspection}
                 >
-                    <Text style={{ color: 'white', fontSize: 18 }}>Submit Inspection</Text>
+                    <Text className="text-white font-bold text-base">Submit Inspection</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
     );
 }
-
-
-    /*return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Inspection</Text>
-            <Button
-                title="Go to back"
-                onPress={() => navigation.goBack()}
-            />
-        </View>
-    );
-}*/
