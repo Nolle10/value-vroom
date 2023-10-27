@@ -27,17 +27,17 @@ export function InspectionScreen() {
                     </Text>
                 )}  
 
-                <Text lassName="text-base my-4">Topic:</Text>
+                <Text className="text-base my-4">Topic:</Text>
                 <TextInput
-                    className="h-10 border border-gray-300 rounded-md px-4 m-3 mb-10"
+                    className="h-10 border border-gray-300 rounded-md px-4 m-1 p-2"
                     placeholder="Enter topic"
                     value={inspectionTopic}
                     onChangeText={(text) => setInspectionTopic(text)}
                 />
 
-                <Text lassName="text-base my-4">Inspection Details:</Text>
+                <Text className="text-base my-4">Inspection Details:</Text>
                 <TextInput
-                    className="h-32 border border-gray-300 rounded-md px-4 m-3"
+                    className="h-32 border border-gray-300 rounded-md px-4 m-1 p-3"
                     placeholder="Describe your inspection"
                     multiline
                     value={inspectionText}
