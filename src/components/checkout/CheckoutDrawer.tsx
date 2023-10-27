@@ -75,7 +75,7 @@ export function CheckoutDrawer(
                         onPress={onPurchase}
                         disabled={!(readyToPurchase && authenticationStore.signedIn())}
                     >
-                        <Text className={`font-bold text-lg ${(readyToPurchase && authenticationStore.signedIn()) ? "text-white" : "text-gray-300"}`}>Purchase</Text>
+                        <Text className={`font-bold text-lg ${(readyToPurchase && authenticationStore.signedIn()) ? "text-white" : "text-gray-300"}`}>Confirm Booking</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -155,12 +155,12 @@ export function InvoiceModal(
                         <TouchableOpacity onPress={() => payMutation.mutate("", {
                             onSuccess: () => {
                                 setModalVisible(false);
-                                navigation.navigate('Home');
+                                navigation.navigate('OrderConfirmation');
                             }
                         })}>
                             {payMutation.isLoading ? (
                                 <ActivityIndicator size="small" color="#0000ff" />
-                            ) : <Text className="bg-green-500 rounded p-2">Pay Invoice</Text>}
+                            ) : <Text className="bg-green-500 rounded p-2">Pay</Text>}
                         </TouchableOpacity>
                     </View>
                 </View>
