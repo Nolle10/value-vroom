@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TabNavigator } from './TabNavigator';
 import { ManageBookingScreen } from '../screens/bookings/ManageBooking';
 import { CarDetailsScreen } from '../screens/search/CarDetails';
+import { SearchScreen } from '../screens/search/Search';
 import { FilterScreen } from '../screens/search/Filter';
 import { EditProfileScreen } from '../screens/settings/EditProfile';
 import { OrderBookingScreen } from '../screens/bookings/OrderBooking';
@@ -27,7 +28,8 @@ export function RootStackNavigator() {
             <RootStack.Screen name="Review" component={ReviewScreen} />
             <RootStack.Screen name="Complaint" component={ComplaintScreen} />
             <RootStack.Screen name="Login" component={LoginScreen} />
-            <RootStack.Screen name="OrderConfirmation" component={OrderConfirmation} />
+            <RootStack.Screen options={{ headerShown: false }} name="OrderConfirmation" component={OrderConfirmation} />
+            <RootStack.Screen options={{ headerShown: false }} name="SearchScreen" component={SearchScreen} />
         </RootStack.Navigator>
     );
 }
