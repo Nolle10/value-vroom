@@ -31,8 +31,7 @@ export function InvoiceModal(
     const { data, error, isLoading } = useCurrentUserCurrentUserGet({});
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    const payMutation = useMutation((_: string) => {
-
+    const payMutation = useMutation({ mutationFn: () => {
         return fetch(`${baseUrl}/bookings`, {
             method: 'POST',
             headers: {
@@ -44,7 +43,7 @@ export function InvoiceModal(
                 ...(bookingStart && (differenceInMinutes(new Date(), bookingStart) > 10) && { start_date: bookingStart?.toISOString() ??  ""})
             }).toString(),
         });
-    });
+    }});
 
     React.useEffect(() => {
         if (!bookingStart || !bookingEnd) {
@@ -160,7 +159,7 @@ export function InvoiceModal(
                                 queryClient.invalidateQueries()
                             }
                         })}>
-                            {payMutation.isLoading ? (
+                            {payMutation.isPending ? (
                                 <ActivityIndicator size="small" color="#0000ff" />
                             ) : <Text className="bg-green-500 rounded p-2">Pay</Text>}
                         </TouchableOpacity>

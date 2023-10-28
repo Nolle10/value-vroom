@@ -60,6 +60,10 @@ function getAllMarkedDates(bookings: Booking[], day1?: Date, day2?: Date) {
     let markedDates = getMarkedDatesDateData(day1, day2);
 
     for (let booking of bookings) {
+        if (booking.status_name == "Completed") {
+            continue;
+        }
+
         let bookingStart = new Date(booking.start_date);
         let bookingEnd = new Date(booking.end_date);
 
@@ -104,6 +108,10 @@ export function BookingCalender(
 
         // If the click is inside a booking, do nothing
         if (data && data.some((booking) => {
+            if (booking.status_name == "Completed") {
+                return false;
+            }
+
             const bookingStart = new Date(booking.start_date);
             const bookingEnd = new Date(booking.end_date);
 
@@ -129,6 +137,10 @@ export function BookingCalender(
         if (firstClick && !secondClick) {
             // Check if the date interval passes over a booking
             if (data && data.some((booking) => {
+                if (booking.status_name == "Completed") {
+                    return false;
+                }
+                
                 const bookingStart = new Date(booking.start_date);
                 const bookingEnd = new Date(booking.end_date);
 
