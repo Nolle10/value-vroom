@@ -51,16 +51,19 @@ export function LoginScreen() {
                 ></TextInput>
             </View>
 
+            <View className="flex-row space-x-1">
+                <Text className="text-sm">Don't have an account?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+                    <Text className="text-sm underline font-bold">Sign Up</Text>
+                </TouchableOpacity>
+            </View>
+
             <TouchableOpacity className="items-center py-2 bg-primary rounded-full" onPress={() => {
                 authenticationStore.login(username, password)
             }} >
                 <Text className="text-white font-bold text-base">Sign In</Text>
             </TouchableOpacity>
 
-            <View className="flex-row space-x-1">
-            <Text className="text-sm ">Don't have an account?</Text>
-            <Text className="text-sm underline font-bold">Sign Up</Text>
-            </View>
         </View>
     );
 }

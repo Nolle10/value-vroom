@@ -16,6 +16,7 @@ interface AuthenticationStore {
     state: AuthenticationState,
     token: string,
     login: (username: string, password: string) => Promise<void>,
+    signup: (email: string, fullname: string, username: string, password: string) => Promise<void>,
     signedIn: () => boolean,
     signOut: () => void,
 }
@@ -45,8 +46,31 @@ export const useAuthenticationStore = create(persist<AuthenticationStore>(
             } else {
                 set({ state: AuthenticationState.Error })
             }
-
             queryClient.invalidateQueries()
+        },
+        signup: async (email: string, fullname: string, username: string, password: string) => {
+            set({ state: AuthenticationState.Authenticating });
+
+            const response = await fetch(baseUrl + "/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    email: email,
+                    full_name: fullname,
+                    username: username,
+                    password: password,
+                }).toString(),
+            });
+            if (response.ok) {
+                const response_data = await response.json()
+                set({ state: AuthenticationState.Authenticated, token: response_data.access_token })
+            } else {
+                set({ state: AuthenticationState.Error })
+            }
+            queryClient.invalidateQueries()
+            {}
         },
         signedIn: () => {
             if (get().state !== AuthenticationState.Authenticated)
