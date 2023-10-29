@@ -35,7 +35,7 @@ export function SettingsScreen() {
                 authenticationStore.signedIn() && (<View className="flex-1 items-center">
                     <View className="rounded-full bg-gray-500 aspect-square w-1/2 items-center justify-center">
                         <FontAwesome name="user" size={100} color="white" />
-                        <TouchableOpacity className="absolute items-center justify-center bottom-[6%] right-[6%] w-1/5 aspect-square rounded-full bg-primary">
+                        <TouchableOpacity className="absolute items-center justify-center bottom-[6%] right-[6%] w-1/5 aspect-square rounded-full bg-primary" onPress={() => navigation.navigate("Edit Profile")}>
                             <FontAwesome name="pencil" size={20} color="white" />
                         </TouchableOpacity>
                     </View>
@@ -52,7 +52,7 @@ export function SettingsScreen() {
             <View className="flex-col pt-8 px-8 space-y-4">
                 {
                     authenticationStore.signedIn() ? (<View className="space-y-4">
-                        <TouchableOpacity className="items-center py-2 bg-primary rounded-xl">
+                        <TouchableOpacity className="items-center py-2 bg-primary rounded-xl" onPress={() => navigation.navigate("Edit Profile")}>
                             <Text className="text-white font-bold text-base">Edit Profile</Text>
                         </TouchableOpacity>
                         <TouchableOpacity className="items-center py-2 bg-primary rounded-xl" onPress={() => authenticationStore.signOut()}>
@@ -63,13 +63,13 @@ export function SettingsScreen() {
                         <TouchableOpacity className="items-center py-2 bg-primary rounded-xl" onPress={() => navigation.navigate("Login")}>
                             <Text className="text-white font-bold text-base">Login</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity className="items-center py-2 bg-primary rounded-xl">
+                        <TouchableOpacity className="items-center py-2 bg-primary rounded-xl" onPress={() => navigation.navigate("Sign Up")}>
                             <Text className="text-white font-bold text-base">Sign Up</Text>
                         </TouchableOpacity>
                     </View>)
                 }
 
-                <TouchableOpacity className="items-center py-2 bg-white border-2 border-primary rounded-xl">
+                <TouchableOpacity className="items-center py-2 bg-white border-2 border-primary rounded-xl" onPress={() => navigation.navigate("Contact Us")}>
                     <Text className="text-primary font-bold text-base">Contact Us</Text>
                 </TouchableOpacity>
             </View>

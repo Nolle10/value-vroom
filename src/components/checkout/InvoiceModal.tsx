@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { baseUrl } from '../../api/apiUrl';
+import { queryClient } from '../../App';
 
 export function InvoiceModal(
     {
@@ -30,8 +31,7 @@ export function InvoiceModal(
     const { data, error, isLoading } = useCurrentUserCurrentUserGet({});
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    const payMutation = useMutation((_: string) => {
-
+    const payMutation = useMutation({ mutationFn: () => {
         return fetch(`${baseUrl}/bookings`, {
             method: 'POST',
             headers: {
@@ -43,7 +43,7 @@ export function InvoiceModal(
                 ...(bookingStart && (differenceInMinutes(new Date(), bookingStart) > 10) && { start_date: bookingStart?.toISOString() ??  ""})
             }).toString(),
         });
-    });
+    }});
 
     React.useEffect(() => {
         if (!bookingStart || !bookingEnd) {
@@ -156,9 +156,10 @@ export function InvoiceModal(
                             onSuccess: () => {
                                 setModalVisible(false);
                                 navigation.navigate('OrderConfirmation');
+                                queryClient.invalidateQueries()
                             }
                         })}>
-                            {payMutation.isLoading ? (
+                            {payMutation.isPending ? (
                                 <ActivityIndicator size="small" color="#0000ff" />
                             ) : <Text className="bg-green-500 rounded p-2">Pay</Text>}
                         </TouchableOpacity>
