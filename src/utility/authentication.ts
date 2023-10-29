@@ -70,12 +70,6 @@ export const useAuthenticationStore = create(persist<AuthenticationStore>(
                 set({ state: AuthenticationState.Error })
             }
             queryClient.invalidateQueries()
-            {/*if (response.ok) {
-                set({ state: AuthenticationState.Authenticated });
-            } else {
-                set({ state: AuthenticationState.Error });
-            }
-        queryClient.invalidateQueries();*/}
         },
         signedIn: () => {
             if (get().state !== AuthenticationState.Authenticated)
