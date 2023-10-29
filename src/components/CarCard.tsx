@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Booking, Car } from '../api/apiSchemas'
-import { useCancelBookingBookingsBookingIdCancelPost, useGetAllCars } from '../api/apiComponents'
+import { useCancelBookingBookingsBookingIdCancelPost, useActivateBookingBookingsBookingIdActivatePost } from '../api/apiComponents'
 import { format } from "date-fns";
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -42,6 +42,12 @@ function getActionButtons(state: CarCardState, carId: number, bookingId: number 
         }
     })
 
+    const activateBookingMutation = useActivateBookingBookingsBookingIdActivatePost({
+        onSuccess: () => {
+            queryClient.invalidateQueries();
+        }
+    })
+
     switch (state) {
         case CarCardState.Active:
             return (
@@ -49,19 +55,30 @@ function getActionButtons(state: CarCardState, carId: number, bookingId: number 
                     <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-4 py-2">
                         <Text className="text-lg text-white">Extend Booking</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2">
+                    <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2" onPress={()=> navigation.navigate("Manage Car Booking", {carId: carId})}>
                         <Text className="text-lg text-primary">More</Text>
                     </TouchableOpacity>
                 </>
             )
         case CarCardState.Pending:
+            return (
+                <>
+                    <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-8 py-2" onPress={() => {
+                        if (!bookingId) return;
+                        activateBookingMutation.mutate({
+                            pathParams: {
+                                bookingId: bookingId
+                            }
+                        })
+                    }}>
+                        <Text className="text-lg text-white">Activate</Text>
+                    </TouchableOpacity>
+                </>
+            )
         case CarCardState.Booked:
             return (
                 <>
-                    <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-4 py-2" onPress={()=> navigation.navigate("Manage Car Booking", {carId: carId})}>
-                        <Text className="text-lg text-white">Activate</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2" onPress={() => {
+                    <TouchableOpacity className="text-lg border-2 border-transparent bg-primary rounded-xl px-4 py-2" onPress={() => {
                         if (!bookingId) return;
                         cancelBookingMutation.mutate({
                             pathParams: {
@@ -69,7 +86,10 @@ function getActionButtons(state: CarCardState, carId: number, bookingId: number 
                             }
                         })
                     }}>
-                        <Text className="text-lg text-primary">Cancel</Text>
+                        <Text className="text-lg text-white">Cancel</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity className="text-lg border-2 border-primary rounded-xl px-4 py-2" onPress={() => navigation.navigate("Car Details", { carId: carId })}>
+                        <Text className="text-lg text-primary">Details</Text>
                     </TouchableOpacity>
                 </>
             )
