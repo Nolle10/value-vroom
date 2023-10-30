@@ -300,6 +300,51 @@ export const useGetCarBookings = <TData = GetCarBookingsResponse>(
   })
 }
 
+export type GetCarReviewsPathParams = {
+  carId: number
+}
+
+export type GetCarReviewsError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type GetCarReviewsResponse = Schemas.Review[]
+
+export type GetCarReviewsVariables = {
+  pathParams: GetCarReviewsPathParams
+} & ApiContext['fetcherOptions']
+
+/**
+ * Get all reviews for a specific car
+ */
+export const fetchGetCarReviews = (variables: GetCarReviewsVariables, signal?: AbortSignal) =>
+  apiFetch<GetCarReviewsResponse, GetCarReviewsError, undefined, {}, {}, GetCarReviewsPathParams>({
+    url: '/cars/{carId}/reviews',
+    method: 'get',
+    ...variables,
+    signal,
+  })
+
+/**
+ * Get all reviews for a specific car
+ */
+export const useGetCarReviews = <TData = GetCarReviewsResponse>(
+  variables: GetCarReviewsVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetCarReviewsResponse, GetCarReviewsError, TData>,
+    'queryKey' | 'queryFn' | 'initialData'
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } = useApiContext(options)
+  return reactQuery.useQuery<GetCarReviewsResponse, GetCarReviewsError, TData>({
+    queryKey: queryKeyFn({ path: '/cars/{car_id}/reviews', operationId: 'getCarReviews', variables }),
+    queryFn: ({ signal }) => fetchGetCarReviews({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  })
+}
+
 export type GetImagesImagesGetError = Fetcher.ErrorWrapper<undefined>
 
 export type GetImagesImagesGetResponse = Schemas.Image[]
@@ -558,6 +603,32 @@ export const useActivateBookingBookingsBookingIdActivatePost = (
   })
 }
 
+export type CreateReviewError = Fetcher.ErrorWrapper<{
+  status: 422
+  payload: Schemas.HTTPValidationError
+}>
+
+export type CreateReviewVariables = ApiContext['fetcherOptions']
+
+/**
+ * Create a new review
+ */
+export const fetchCreateReview = (variables: CreateReviewVariables, signal?: AbortSignal) =>
+  apiFetch<void, CreateReviewError, undefined, {}, {}, {}>({ url: '/reviews', method: 'post', ...variables, signal })
+
+/**
+ * Create a new review
+ */
+export const useCreateReview = (
+  options?: Omit<reactQuery.UseMutationOptions<void, CreateReviewError, CreateReviewVariables>, 'mutationFn'>,
+) => {
+  const { fetcherOptions } = useApiContext()
+  return reactQuery.useMutation<void, CreateReviewError, CreateReviewVariables>({
+    mutationFn: (variables: CreateReviewVariables) => fetchCreateReview({ ...fetcherOptions, ...variables }),
+    ...options,
+  })
+}
+
 export type QueryOperation =
   | {
       path: '/current_user'
@@ -588,6 +659,11 @@ export type QueryOperation =
       path: '/cars/{car_id}/bookings'
       operationId: 'getCarBookings'
       variables: GetCarBookingsVariables
+    }
+  | {
+      path: '/cars/{car_id}/reviews'
+      operationId: 'getCarReviews'
+      variables: GetCarReviewsVariables
     }
   | {
       path: '/images'

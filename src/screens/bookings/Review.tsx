@@ -50,7 +50,7 @@ const handleStarPress = (index: number) => {
      for (let i = 0; i<= 4;i++){
     newStarColors[i] = unpicked;}
        
-     for (let i = 0; i<= index;i++){
+     for (let i = 0; i <= index;i++){
     newStarColors[i] = picked;}
     setStarColors(newStarColors); 
 };

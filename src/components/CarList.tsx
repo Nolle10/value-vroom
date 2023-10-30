@@ -37,7 +37,6 @@ export function CarList() {
         if (bookings.data) {
             for(let [name, _] of groupedBookings.entries()) {
                 let bookings_filter = bookings.data.filter((booking: Booking) => {
-                    console.error(booking.status?.name);
                     return booking.status_name === name
                 });
                 groupedBookings.set(name, bookings_filter);

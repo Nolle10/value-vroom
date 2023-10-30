@@ -34,20 +34,7 @@ export function TabNavigator() {
         })}>
             <Tab.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
             <Tab.Screen name="Bookings" component={BookingsScreen} />
-            <Tab.Screen name="Search" component={SearchScreen} listeners={{
-                tabPress: e => {
-                    // Prevent default action
-                    e.preventDefault();
-
-                    // Navigate to the home screen
-                    navigation.navigate('Home');
-
-                    // Focus the search bar
-                    setTimeout(() => {
-                    (window as any).searchref.current.focus();
-                    }, 0);
-                },
-            }} />
+            <Tab.Screen name="Search" component={SearchScreen}/>
             <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     );
