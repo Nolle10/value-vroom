@@ -12,7 +12,7 @@ export function CheckoutCarPreview(
         <View className="p-4 bg-white rounded-xl shadow-xl  space-y-2">
             <CarImage car={car} />
             <View>
-                <Text className="text-2xl font-bold">
+                <Text className="text-xl font-bold">
                     {car.car_model?.name}
                 </Text>
                 <Text className="text-gray-500">

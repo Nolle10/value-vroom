@@ -98,7 +98,7 @@ export function OrderBookingScreen(
     return (
         <>
         <View className="flex-1 justify-between">
-            <ScrollView contentContainerStyle={{ gap: 20 }} className="flex-1 flex-col p-4">
+            <ScrollView contentContainerStyle={{ gap: 15 }} className="flex-1 flex-col p-4">
                 <CheckoutCarPreview car={car} />
                 <LocationPicker disabled={true} defaultLocation="ODENSE - DENMARK" locationType={LocationType.Pickup} onSelect={() => { }} />
                 <LocationPicker disabled={false} defaultLocation="ODENSE - DENMARK" locationType={LocationType.Dropoff} onSelect={() => { }} />

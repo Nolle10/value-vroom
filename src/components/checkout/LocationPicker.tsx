@@ -49,13 +49,13 @@ export function LocationPicker(
 
     return (
         <>
-            <TouchableOpacity className={`p-4 bg-white space-y-1 rounded-xl shadow-xl ${disabled && "brightness-75 pointer-events-none"}`}
-                onPress={() => { setModalVisible(true) }} >
+            <TouchableOpacity disabled={disabled} className={`p-4 bg-white space-y-1 rounded-xl shadow-xl ${disabled && "brightness-75 bg-gray-300"}`}
+                onPress={() => { !disabled && setModalVisible(true) }} >
                 <Text className="text-gray-500">
                     {locationLabel(locationType)}
                 </Text>
                 <View className="flex-row items-center space-x-1">
-                    <Text className="text-xl font-bold text-gray-600">
+                    <Text className={`text-lg font-bold text-gray-600 ${disabled && "text-gray-500"}`}>
                         {selectedLocation}
                     </Text>
                     {!disabled && <FontAwesome name="caret-down" size={18} color="gray" />}
