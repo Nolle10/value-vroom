@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, SafeAreaView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Car } from '../../api/apiSchemas';
 import { differenceInHours, differenceInMinutes, format, parse } from 'date-fns';
@@ -89,59 +89,59 @@ export function InvoiceModal(
                 <View className="p-4 pb-1 bg-white rounded-t-2xl">
                     <Text className="text-lg font-bold border-b mb-2">Order Invoice</Text>
                     <View className='px-1'>
-                        <Text className="font-mono">Invoice Date: {format(new Date(), 'yyyy-MM-dd')}</Text>
-                        <Text className="font-mono">Invoice Number: TBD</Text>
-                        <Text className="font-mono"> </Text>
-                        <Text className="font-mono">Billing:</Text>
-                        <Text className="font-mono"> - Name: {data.full_name}</Text>
-                        <Text className="font-mono"> - E-Mail: {data.email}</Text>
-                        <Text className="font-mono"> - Address: TBD </Text>
-                        <Text className="font-mono"> - Phone: TBD</Text>
-                        <Text className="font-mono"> </Text>
-                        <Text className="font-mono pb-1">Description of Services:</Text>
+                        <Text className="">Invoice Date: {format(new Date(), 'yyyy-MM-dd')}</Text>
+                        <Text className="">Invoice Number: TBD</Text>
+                        <Text className=""> </Text>
+                        <Text className="">Billing:</Text>
+                        <Text className=""> - Name: {data.full_name}</Text>
+                        <Text className=""> - E-Mail: {data.email}</Text>
+                        <Text className=""> - Address: TBD </Text>
+                        <Text className=""> - Phone: TBD</Text>
+                        <Text className=""> </Text>
+                        <Text className=" pb-1">Description of Services:</Text>
                         <View className="flex-row justify-between mb-4">
                             <View className="flex-[2] flex-col">
                                 <View className="border-y">
-                                    <Text className="font-mono">Item</Text>
+                                    <Text className="">Item</Text>
                                 </View>
-                                <Text className="font-mono pr-2">Tesla Model 3</Text>
-                                <Text className="font-mono pr-2">Service Fee</Text>
-                                <Text className="font-mono pr-2">Premium Insurance</Text>
-                                <Text className="font-mono pr-2 border-y">Total</Text>
+                                <Text className=" pr-2">Tesla Model 3</Text>
+                                <Text className=" pr-2">Service Fee</Text>
+                                <Text className=" pr-2">Premium Insurance</Text>
+                                <Text className=" pr-2 border-y">Total</Text>
                             </View>
                             <View className="flex-1 flex-col">
                                 <View className="border-y">
-                                    <Text className="font-mono">Quantity</Text>
+                                    <Text className="">Quantity</Text>
                                 </View>
-                                <Text className="font-mono">{bookingTime} hours</Text>
-                                <Text className="font-mono">1</Text>
-                                <Text className="font-mono">1</Text>
-                                <Text className="font-mono pr-2 border-y"> </Text>
+                                <Text className="">{bookingTime} hours</Text>
+                                <Text className="">1</Text>
+                                <Text className="">1</Text>
+                                <Text className=" pr-2 border-y"> </Text>
                             </View>
                             <View className="flex-1 flex-col">
                                 <View className="border-y">
-                                    <Text className="font-mono">Rate</Text>
+                                    <Text className="">Rate</Text>
                                 </View>
-                                <Text className="font-mono">USD {car.price / 100}/hour</Text>
-                                <Text className="font-mono"> </Text>
-                                <Text className="font-mono"> </Text>
-                                <Text className="font-mono pr-2 border-y"> </Text>
+                                <Text className="">USD {car.price / 100}/hour</Text>
+                                <Text className=""> </Text>
+                                <Text className=""> </Text>
+                                <Text className=" pr-2 border-y"> </Text>
                             </View>
                             <View className="flex-1 flex-col">
                                 <View className="border-y">
-                                    <Text className="font-mono">Price</Text>
+                                    <Text className="">Price</Text>
                                 </View>
-                                <Text className="font-mono">USD {carRentPrice}</Text>
-                                <Text className="font-mono">USD 10</Text>
-                                <Text className="font-mono">USD 100</Text>
-                                <Text className="font-mono pr-2 border-y">USD {carRentPrice + 110}</Text>
+                                <Text className="">USD {carRentPrice}</Text>
+                                <Text className="">USD 10</Text>
+                                <Text className="">USD 100</Text>
+                                <Text className=" pr-2 border-y">USD {carRentPrice + 110}</Text>
                             </View>
                         </View>
                         <View className="flex-row pb-1">
-                            <Text className="font-mono">Terms and Conditions: </Text>
-                            <Text className="font-mono underline text-blue-700">Click here</Text>
+                            <Text className="">Terms and Conditions: </Text>
+                            <Text className=" underline text-blue-700">Click here</Text>
                         </View>
-                        <Text className="font-mono py-2">Thank you for choosing Value-Vroom for renting your car.</Text>
+                        <Text className=" py-2">Thank you for choosing Value-Vroom for renting your car.</Text>
                     </View>
                     <View className="flex-row border-t py-2 items-center justify-end p-2 space-x-4">
                         {(payMutation.isError) && (
@@ -152,7 +152,7 @@ export function InvoiceModal(
                         <TouchableOpacity onPress={() => setModalVisible(false)}>
                             <Text className="bg-gray-400 rounded p-2">Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => payMutation.mutate("", {
+                        <TouchableOpacity onPress={() => payMutation.mutate(undefined, {
                             onSuccess: () => {
                                 setModalVisible(false);
                                 navigation.navigate('OrderConfirmation');
@@ -164,6 +164,7 @@ export function InvoiceModal(
                             ) : <Text className="bg-green-500 rounded p-2">Pay</Text>}
                         </TouchableOpacity>
                     </View>
+                    <SafeAreaView />
                 </View>
             )}
         </Modal>

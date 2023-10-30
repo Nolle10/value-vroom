@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, ScrollView } from "react-native";
+import { View, Text, ActivityIndicator, ScrollView, SafeAreaView } from "react-native";
 import { CheckoutDrawer } from "../../components/checkout/CheckoutDrawer";
 import { LocationPicker, LocationType } from "../../components/checkout/LocationPicker";
 import { CheckoutCarPreview } from "../../components/checkout/CheckoutCarPreview";
@@ -96,6 +96,7 @@ export function OrderBookingScreen(
     }
 
     return (
+        <>
         <View className="flex-1 justify-between">
             <ScrollView contentContainerStyle={{ gap: 20 }} className="flex-1 flex-col p-4">
                 <CheckoutCarPreview car={car} />
@@ -118,5 +119,7 @@ export function OrderBookingScreen(
             </CheckoutDrawer>
             <InvoiceModal bookingStart={startDate} bookingEnd={endDate} car={car} isVisible={isInvoiceModalVisible} setModalVisible={setIsInvoiceModalVisible} />
         </View>
+        <SafeAreaView className="bg-slate-300" />
+        </>
     )
 }
