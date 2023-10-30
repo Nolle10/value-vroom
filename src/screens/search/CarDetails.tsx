@@ -65,7 +65,7 @@ export function CarDetailsScreen(
                 <View className="flex flex-row justify-between">
                     <Text className="font-bold text-xl">{car.car_model_name}</Text>
                     <View></View>
-                    <Text>4,5</Text>
+                    <Text>{(Math.round(car.rating * 10) / 10).toFixed(1)}</Text>
                 </View>
                 <Text>{car.year}</Text>
             </View>
