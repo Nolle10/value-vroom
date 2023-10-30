@@ -34,7 +34,7 @@ function SelectionCard(
                 </View>
                 <TouchableOpacity onPress={onPressDate} className="flex-1 flex-row justify-center items-center space-x-1">
                     <FontAwesome name="calendar" size={18} color="gray" />
-                    <Text className="text-xl text-center font-bold text-gray-600">
+                    <Text className="text-lg text-center font-bold text-gray-600">
                         {format(date ?? new Date(), 'dd/MM/yyyy')}
                     </Text>
                     <FontAwesome name="caret-down" size={18} color="gray" />
@@ -42,7 +42,7 @@ function SelectionCard(
                 <View className="w-px h-full bg-gray-400"></View>
                 <TouchableOpacity onPress={onPressTime} className="flex-1 flex-row justify-center items-center space-x-1">
                     <FontAwesome name="clock-o" size={18} color="gray" />
-                    <Text className="text-xl font-bold text-gray-600 capitalize">
+                    <Text className="text-lg font-bold text-gray-600 capitalize">
                         {timeslot ?? "Select Time"}
                     </Text>
                     <FontAwesome name="caret-down" size={18} color="gray" />

@@ -21,22 +21,22 @@ function CheckoutMessage(
     }
 
     if (authenticationStore.signedIn() && !readyToPurchase) {
-        return <Text className="text-white font-bold text-lg">
+        return <Text className="text-white font-bold text-base">
             Please specify booking time for the car.
         </Text>
     }
 
     if (!authenticationStore.signedIn()) {
         return <View className="flex-row">
-            <Text className="text-white font-bold text-lg">Please </Text>
+            <Text className="text-white font-bold text-base">Please </Text>
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text className="text-blue-500 font-bold text-lg underline">login</Text>
+                <Text className="text-blue-500 font-bold text-base underline">login</Text>
             </TouchableOpacity>
-            <Text className="text-white font-bold text-lg"> or </Text>
+            <Text className="text-white font-bold text-base"> or </Text>
             <TouchableOpacity>
-                <Text className="text-blue-500 font-bold text-lg underline">sign-up</Text>
+                <Text className="text-blue-500 font-bold text-base underline">sign-up</Text>
             </TouchableOpacity>
-            <Text className="text-white font-bold text-lg"> before purchasing a car.</Text>
+            <Text className="text-white font-bold text-base"> before purchasing a car.</Text>
         </View>
     }
 }
@@ -68,14 +68,14 @@ export function CheckoutDrawer(
                 <View className="w-full h-px  bg-slate-400"></View>
                 <View className='flex-row justify-evenly'>
                     <TouchableOpacity className="bg-white border-2 border-primary py-4 px-12 rounded-xl" onPress={onCancel}>
-                        <Text className='text-primary font-bold text-lg'>Cancel</Text>
+                        <Text className='text-primary font-bold text-base'>Cancel</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         className={` py-4 px-12 rounded-xl ${(readyToPurchase && authenticationStore.signedIn()) ? "bg-primary" : "bg-gray-400"}`}
                         onPress={onPurchase}
                         disabled={!(readyToPurchase && authenticationStore.signedIn())}
                     >
-                        <Text className={`font-bold text-lg ${(readyToPurchase && authenticationStore.signedIn()) ? "text-white" : "text-gray-300"}`}>Confirm Booking</Text>
+                        <Text className={`font-bold text-base ${(readyToPurchase && authenticationStore.signedIn()) ? "text-white" : "text-gray-300"}`}>Confirm Booking</Text>
                     </TouchableOpacity>
                 </View>
             </View>
