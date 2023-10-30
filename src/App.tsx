@@ -27,7 +27,7 @@ function App() {
   const scheme = useColorScheme();
   return (
     <PersistQueryClientProvider client={queryClient} persistOptions={{persister}}>
-      <NavigationContainer theme={scheme == "dark" ? DarkTheme : DefaultTheme}>
+      <NavigationContainer>
           <RootStackNavigator />
       </NavigationContainer>
     </PersistQueryClientProvider>
