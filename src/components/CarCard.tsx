@@ -122,7 +122,7 @@ export function CarCard({ car, booking, state }: { car: Car, booking?: Booking, 
                     </View>
                     <View className="flex-row items-center space-x-1">
                         <FontAwesome name="star" size={22} color="orange" />
-                        <Text className="text-lg">4.5</Text>
+                        <Text className="text-lg">{(Math.round(car.rating * 10) / 10).toFixed(1)}</Text>
                     </View>
                     {booking && <View className="flex-row space-x-2">
                         <View className="pt-1.5">
