@@ -12,6 +12,12 @@ export type BodyCreateBookingBookingsPost = {
   start_date?: string | null
 }
 
+export type BodyCreateReview = {
+  rating: number
+  review: string
+  car_id: number
+}
+
 export type BodyLoginTokenPost = {
   grant_type?: string | null
   username: string
@@ -73,6 +79,7 @@ export type Car = {
   price: number
   rating: number
   Booking?: Booking[] | null
+  Reviews?: Review[] | null
 }
 
 /**
@@ -115,6 +122,19 @@ export type Image = {
 }
 
 /**
+ * Represents a Review record
+ */
+export type Review = {
+  id: number
+  car_id: number
+  car?: Car | null
+  user?: User | null
+  username: string
+  rating: number
+  comment: string
+}
+
+/**
  * Represents a Token record
  */
 export type Token = {
@@ -131,6 +151,7 @@ export type User = {
   full_name: string
   hashed_password: string
   Booking?: Booking[] | null
+  Reviews?: Review[] | null
 }
 
 export type ValidationError = {

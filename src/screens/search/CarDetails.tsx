@@ -1,13 +1,10 @@
 import React from "react";
-import { View, Button, Text, ActivityIndicator } from "react-native";
-import { useGetAllCars } from '../../api/apiComponents';
+import { View, ScrollView, Text, ActivityIndicator } from "react-native";
+import { useGetAllCars, useGetCarReviews } from '../../api/apiComponents';
 import { Car } from "../../api/apiSchemas";
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { CarImage } from "../../components/CarImage";
 import { DetailCard } from "./DetailCard";
 import { LocationCard } from "./LocationCard";
-import { ScrollView } from "react-native-gesture-handler";
 import { ReviewCard } from "./ReviewCard";
 import { BookCarButton } from "./BookCarButton";
 
@@ -18,8 +15,8 @@ export function CarDetailsScreen(
         route: any
     }
 ) {
-    const navigation = useNavigation<NativeStackNavigationProp<any>>();
-    const { data } = useGetAllCars({});
+    const { data, isLoading } = useGetAllCars({}, {refetchInterval: 5000});
+    const carReviewsHook = useGetCarReviews({pathParams: {carId: route.params.carId}}, {refetchInterval: 5000});
 
     if (!route.params || !route.params.carId) {
         return (
@@ -27,6 +24,14 @@ export function CarDetailsScreen(
                 <Text>
                     No car selected...
                 </Text>
+            </View>
+        )
+    }
+
+    if (carReviewsHook.isLoading || isLoading) {
+        return (
+            <View className="flex-1 justify-center items-center">
+                <ActivityIndicator size="large" color="#0000ff" />
             </View>
         )
     }
@@ -53,9 +58,11 @@ export function CarDetailsScreen(
         )
     }
 
-    let reviews = []
-    for (let index = 0; index < 10; index++) {
-        reviews.push(<ReviewCard name={"Hans Hansen"} review={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "} stars={5}/>)           
+    let reviews: React.ReactNode = []
+    if(carReviewsHook.data) {
+        reviews = carReviewsHook.data.map((review) => {
+            return <ReviewCard name={review.user?.full_name || "John Doe"} review={review.comment} stars={review.rating}/>
+        })
     }
 
     return (

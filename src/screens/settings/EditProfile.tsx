@@ -1,9 +1,6 @@
 import React from "react";
-import { View, Button, Text, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { TextInput } from "react-native-gesture-handler";
 
 export function EditProfileScreen() {
 

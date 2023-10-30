@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Button, Text } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export function OrderConfirmation() {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -21,7 +20,7 @@ export function OrderConfirmation() {
             </View>
 
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <text className="text-3xl tw-white dark:text-white">Back to home</text>
+                <Text className="text-3xl tw-white dark:text-white">Back to home</Text>
             </TouchableOpacity>
         </View>
     );

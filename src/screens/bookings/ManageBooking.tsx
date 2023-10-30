@@ -45,7 +45,7 @@ export function ManageBookingScreen({
             <TouchableOpacity className="text-lg bg-primary text-white rounded-lg p-3 m-2" onPress={() => navigation.navigate('Order Booking')}>
               <Text className="text-lg">Rebook Car</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="text-lg bg-primary text-white rounded-lg p-3 m-2" onPress={() => navigation.navigate('Review')}>
+            <TouchableOpacity className="text-lg bg-primary text-white rounded-lg p-3 m-2" onPress={() => navigation.navigate('Review', {carId: route.params.carId})}>
               <Text className="text-lg">Review Car</Text>
             </TouchableOpacity>
           </View>
