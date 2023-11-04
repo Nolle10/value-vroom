@@ -8,17 +8,17 @@ export function BookCarButton({ price }: { price: number }) {
 
 
     return (
-        <View className="flex-row justify-between">
-            <View>
-                <Text className="text-gray-500">Price</Text>
-                <View className="flex-row">
-                  <Text className="text-bold">{price}</Text>
-                  <Text className="text-gray-500">/day</Text>
-                </View>
-            </View>
+        <View>
             <TouchableOpacity className="justify-center bg-primary py-2 px-7 rounded-xl shadow-xl" onPress={() => navigation.navigate('Order Booking')}>
-                <Text className="text-white text-bold text-xl">Book</Text>
+                <View className="flex-row justify-between">
+                    <Text className="text-white text-bold text-xl">Rent Now</Text>
+                    <View className="flex-row">
+                        <Text className="text-white text-bold text-xl">{price}kr</Text>
+                        <Text className="text-gray-400 text-bold text-xl">./day</Text>
+                    </View>
+                </View>
             </TouchableOpacity>
         </View>
+
     );
 }

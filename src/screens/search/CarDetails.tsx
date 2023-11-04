@@ -5,6 +5,9 @@ import { Car } from "../../api/apiSchemas";
 import { CarImage } from "../../components/CarImage";
 import { DetailCard } from "./DetailCard";
 import { LocationCard } from "./LocationCard";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { ScrollView } from "react-native-gesture-handler";
 import { ReviewCard } from "./ReviewCard";
 import { BookCarButton } from "./BookCarButton";
 
@@ -67,23 +70,41 @@ export function CarDetailsScreen(
 
     return (
         <View className="flex-1">
-        <ScrollView contentContainerStyle={{ gap: 20 }} className="flex-1 flex-col p-4">
-            <View className="flex px-5 py-2">
+        <ScrollView className="flex-1 flex-col">
+            <View className="flex px-5 bg-gray-200">
                 <View className="flex flex-row justify-between">
                     <Text className="font-bold text-xl">{car.car_model_name}</Text>
-                    <View></View>
-                    <Text>{(Math.round(car.rating * 10) / 10).toFixed(1)}</Text>
                 </View>
-                <Text>{car.year}</Text>
+                <View className="flex-row">
+                    <FontAwesome name="star" size={22} color="orange" />
+                    <Text>{Math.round(car.rating)}</Text>
+                </View>
             </View>
-            <View>
-                <CarImage car={car}/>
+            <View className="bg-gray-200">
+                <View className="flex-row justify-between items-center px-2">
+                    <FontAwesome name="caret-left" size={22} color="orange"/>
+                    <View className="flex-1">
+                        <CarImage car={car} />
+                    </View>
+                    <FontAwesome name="caret-right" size={22} color="orange"/>
+                </View>
             </View>
+            <View className="flex-row bg-gray-200 justify-center">
+                    <Text className="p-1 mx-1 bg-orange-400 rounded-full" />
+                    <Text className="p-1 mx-1 bg-gray-400 rounded-full" />
+                    <Text className="p-1 mx-1 bg-gray-400 rounded-full" />
+            </View>
+            <View className="bg-gray-200 rounded-b-[30px] items-center shadow-xl">
+                <View className="p-4">
+                    <LocationCard location={car.city + " - " + car.country} />
+                </View>
+            </View>
+
             <View>
                 <View>
-                    <Text className="px-4">Details</Text>
+                    <Text className="px-4 py-5 text-xl font-bold">Details</Text>
                 </View>
-                <View className="flex-1 flex-row p-4 justify-between">
+                <View className="flex-1 flex-row p-4 justify-evenly">
                     <DetailCard name={"Motor"} amount={car.car_model?.horse_power} units={"HP"}/>
                     <DetailCard name={"Fuel Economy"} amount={car.car_model?.fuel_economy} units={"km/L"}/>
                     <DetailCard name={"Horsepower"} units={car.car_model?.fuel_type} />
@@ -91,22 +112,14 @@ export function CarDetailsScreen(
             </View>
             <View>
                 <View className="px-4">
-                    <Text>Location</Text>
-                </View>
-                <View className="p-4">
-                    <LocationCard location={car.city + " - " + car.country} />
-                </View>
-            </View>
-            <View>
-                <View className="px-4">
-                    <Text>Reviews</Text>
+                    <Text className="text-xl font-bold">Reviews</Text>
                 </View>
                 <ScrollView horizontal className="p-4 overflow-hidden">
                     {reviews}
                 </ScrollView>
             </View>
             </ScrollView>
-            <View className="p-4 border-2 border-black">
+            <View className="p-10">
                 <BookCarButton price={car.price} />
             </View>
         </View>

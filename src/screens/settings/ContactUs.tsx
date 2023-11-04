@@ -33,7 +33,7 @@ export function ContactUsScreen() {
                 )}
 
                 <Logo />
-                <Text className="text-lg my-4 mt-7 text-center">We here at ValueVorrom appreciate your inputs and are always interested and ready to respond to your questions or wishes.</Text>
+                <Text className="text-lg my-4 mt-7 text-center">We here at ValueVroom appreciate your inputs and are always interested and ready to respond to your questions or wishes.</Text>
 
                 <Text className="text-lg my-4 mt-16">Phone:</Text>
                 <Text className="text-base my-1 mb-20 py-2 bg-gray-200 text-gray-500 text-center rounded-md">Contact us at: {phoneNumber}</Text>
